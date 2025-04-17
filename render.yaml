@@ -2,7 +2,9 @@ services:
   - type: web
     name: ecocenter-django
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: gunicorn myproject.wsgi:application
     autoDeploy: true
     envVars:
