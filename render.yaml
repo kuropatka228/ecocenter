@@ -1,16 +1,6 @@
 services:
   - type: web
-    name: ecocenter-django
-    env: python
-    buildCommand: |
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-    startCommand: gunicorn myproject.wsgi:application
-    autoDeploy: true
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: myproject.settings
-      - key: SECRET_KEY
-        value: your-secret-key-here
-      - key: DEBUG
-        value: false
+    name: your-app-name
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn ecocenter.wsgi:application
