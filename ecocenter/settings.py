@@ -7,7 +7,7 @@ SECRET_KEY = 'ваш-secret-key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ecocenter.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
