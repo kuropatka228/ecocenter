@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="service-detail" style="padding: 40px 0; ">
+    <div class="container" style="max-width: 1100px; margin: 0 auto;">
+        <div class="service-header" style="text-align: center; margin-bottom: 30px;">
+            <h1 style="font-size: 36px; color: #2a3b4c;">{{ service.title }}</h1>
+            {% if service.price %}
+            <span class="price" style="font-size: 22px; color: #4a6b82; display: inline-block; margin-top: 10px;">
+                {{ service.price }} руб.
+            </span>
+            {% endif %}
+        </div>
+
+        <div class="service-content" style="display: flex; flex-wrap: wrap; gap: 30px; background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); align-items: center;">
+            <div class="service-image" style="flex: 1 1 400px; text-align: center;">
+                <img src="{{ service.image.url }}" alt="{{ service.title }}" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+            </div>
+            <div class="service-description" style="flex: 1 1 400px; font-size: 18px; color: #444; dis  ">
+                {{ service.description|linebreaks }}
+                <div style="margin-top: 20px;">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'create_order' service.pk %}" class="btn btn-outline">
+                        Заказать услугу
+                    </a>
+                    {% else %}
+                    <p style="margin-top: 20px;">
+                        Для заказа услуги необходимо
+                        <a href="{% url 'login' %}" style="color: #4a90e2; font-weight: 500;">войти</a>
+                        или
+                        <a href="{% url 'register' %}" style="color: #4a90e2; font-weight: 500;">зарегистрироваться</a>.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

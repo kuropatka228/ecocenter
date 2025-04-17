@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="services-section">
+    <div class="container">
+        <h1 class="section-title">Наши услуги</h1>
+        <div class="services-vertical">
+            {% for service in services %}
+            <div class="service-vertical-card">
+                <div class="service-vertical-img">
+                    <img src="{{ service.image.url }}" alt="{{ service.title }}" loading="lazy">
+                </div>
+                <div class="service-vertical-content">
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                    {% if service.price %}
+                    <div class="service-price">{{ service.price }} руб.</div>
+                    {% endif %}
+                    <a href="{% url 'service_detail' service.pk %}" class="btn btn-outline">Подробнее</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

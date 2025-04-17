@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="about-section">
+    <div class="container">
+        <div class="section-header">
+            <h1 class="section-title">О нашем центре</h1>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Миссия и ценности экологического центра</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-main">
+                <div class="about-text">
+                    <h2>Наша история</h2>
+                    <p>{{ settings.about }}</p>
+                </div>
+
+                <div class="about-image">
+                    <img src="{% static 'images/about_image.jpg' %}" alt="Наш центр" loading="lazy">
+                </div>
+            </div>
+
+            <div class="achievements">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>12+</h3>
+                    <p>Лет опыта</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>500+</h3>
+                    <p>Экспертиз</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>50+</h3>
+                    <p>Специалистов</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>1000+</h3>
+                    <p>Клиентов</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Наш Директор</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Профессионал в области экологии</p>
+        </div>
+
+        <div class="compact-team-grid" style="display: flex; justify-content: center; align-items: center; gap: 40px; font-size: 20px;   padding: 30px;  ">
+
+            <div class="compact-team-member" style="transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <div class="compact-team-photo" style="overflow: hidden; border-radius: 15px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);">
+                    <img src="{% static 'images/director.jpg' %}" alt="Директор" loading="lazy" style="width: 240px; height: auto; display: block; transition: transform 0.3s ease;">
+                </div>
+            </div>
+
+            <div class="compact-team-info" style="max-width: 500px;">
+                <h1 class="section-title" style= " flex-direction: column; text-align: left; font-size: 28px; margin-bottom: 15px; color: #2a3b4c;">
+                    Дмитрий Жигарев Владимирович<br>
+                    <span style="font-size: 20px; color: #4a6b82;">Директор</span><br>
+                    <span style="font-size: 18px; color: #6c8ba7;">Основатель центра в 2010 году</span>
+                </h1>
+                <p style="font-size: 16px; color: #444;">Под его руководством наш центр стал одним из лидеров в области экологических решений. Дмитрий вдохновляет команду на постоянное развитие и инновации.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

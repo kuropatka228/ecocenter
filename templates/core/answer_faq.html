@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="answer-section">
+    <div class="container">
+        <h1>Управление вопросом</h1>
+
+        <div class="question-container">
+            <div class="question-info">
+                <p><strong>От:</strong> {{ message.name }}</p>
+                <p><strong>Email:</strong> {{ message.email }}</p>
+                <p><strong>Телефон:</strong> {{ message.phone|default:"не указан" }}</p>
+                <p><strong>Дата:</strong> {{ message.created_at|date:"d.m.Y H:i" }}</p>
+            </div>
+
+            <div class="question-text">
+                <h3>Вопрос:</h3>
+                <p>{{ message.message }}</p>
+            </div>
+        </div>
+
+        <form method="post" class="answer-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="answer">Ответ:</label>
+                <textarea name="answer" id="answer" rows="6" class="form-control">{{ message.answer }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Статус:</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="new" {% if message.status == 'new' %}selected{% endif %}>Новый</option>
+                    <option value="processed" {% if message.status == 'processed' %}selected{% endif %}>Обработан</option>
+                    <option value="published" {% if message.status == 'published' %}selected{% endif %}>Опубликован</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">Сохранить</button>
+                <a href="{% url 'faq' %}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="contact">
+    <div class="container">
+        <h1>Контакты</h1>
+        <div class="contact-content">
+<div class="contact-info animated-block">
+    <h2 class="section-title"><i class="fas fa-address-book"></i> Контактная информация</h2>
+
+    <div class="contact-card">
+        <div class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Адрес</h3>
+                <p>{{ settings.address }}</p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Телефон</h3>
+                <p><a href="tel:{{ settings.phone|cut:' ' }}">{{ settings.phone }}</a></p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-text">
+                <h3>Email</h3>
+                <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h3 class="schedule-title"><i class="far fa-clock"></i> Режим работы</h3>
+        <ul class="schedule-list">
+            <li><span>Понедельник:</span> 8:00 - 19:00</li>
+            <li><span>Вторник:</span> 8:00 - 19:00</li>
+            <li><span>Среда:</span> 8:00 - 19:00</li>
+            <li><span>Четверг:</span> 8:00 - 19:00</li>
+            <li><span>Пятница:</span> 9:00 - 18:00</li>
+            <li class="weekend"><span>Суббота:</span> выходной</li>
+            <li class="weekend"><span>Воскресенье:</span> выходной</li>
+        </ul>
+    </div>
+</div>
+            <div class="contact-form">
+                <h2>Напишите нам</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <div class="map">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2b3c4d5e6f7g8h9i0j&amp;source=constructor"
+                    width="100%"
+                    height="400"
+                    frameborder="0"></iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="answer-section">
+    <div class="container">
+        <h1>Ответ на вопрос</h1>
+        
+        <div class="answer-form-container">
+            <div class="original-question">
+                <h3>Вопрос от {{ message.name }}</h3>
+                <p class="question-date">{{ message.created_at|date:"d.m.Y H:i" }}</p>
+                <div class="question-text">
+                    <p>{{ message.message }}</p>
+                </div>
+            </div>
+            
+            <form method="post" class="answer-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="answer">Ваш ответ:</label>
+                    <textarea name="answer" id="answer" rows="8" class="form-control">{% if message.answer %}{{ message.answer }}{% endif %}</textarea>
+                </div>
+                <button type="submit" class="btn">Сохранить ответ</button>
+                <a href="{% url 'faq' %}" class="btn btn-secondary">Отмена</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

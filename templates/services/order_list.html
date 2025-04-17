@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+.orders {
+    padding: 40px 0;
+    background-color: var(--light);
+}
+
+.orders h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.orders-table {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(2, 146, 151, 0.1);
+    background-color: var(--bg);
+    padding: 15px;
+}
+
+.orders-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    min-width: 600px;
+}
+
+.orders-table thead {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.orders-table th, .orders-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.orders-table tbody tr:hover {
+    background-color: #e6f6f6;
+}
+
+.orders-table tr:last-child td {
+    border-bottom: none;
+}
+
+.orders-table td[colspan="4"] {
+    text-align: center;
+    color: var(--primary-dark);
+    font-style: italic;
+    padding: 40px 0;
+}
+
+.btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s ease;
+    margin-right: 8px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.status-form {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.status-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    background-color: white;
+    font-size: 14px;
+    color: #34495e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+
+.status-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+
+.status-new {
+    color: #e67e22;
+    font-weight: 500;
+}
+
+.status-in_progress {
+    color: #3498db;
+    font-weight: 500;
+}
+
+.status-completed {
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.status-cancelled {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+</style>
+<section class="orders">
+    <div class="container">
+        <h1>{% if request.user.is_staff %}Все заявки{% else %}Мои заявки{% endif %}</h1>
+        <div class="orders-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Услуга</th>
+                        <th>Дата создания</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.service.title }}</td>
+                        <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                        <td>{{ order.get_status_display }}</td>
+                        <td>
+                            {% if request.user.is_staff %}
+                            <form method="post" action="{% url 'my_orders' %}" class="status-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="order_id" value="{{ order.id }}">
+                                <select name="status" class="status-select">
+                                    {% for value, label in order.STATUS_CHOICES %}
+                                    <option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="btn btn-status" style="margin: 0;">Обновить</button>
+                            </form>
+                            {% else %}
+                            <span class="btn btn-details">{{ order.get_status_display }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">У вас нет заявок</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
