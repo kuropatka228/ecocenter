@@ -1,25 +1,31 @@
 import os
 from pathlib import Path
 
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'ваш-secret-key'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecocenter.onrender.com']
+ALLOWED_HOSTS = ['ecocenter.onrender.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'custom_admin.apps.CustomAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
-    'services',
-    'users',
+    'core.apps.CoreConfig',
+    'services.apps.ServicesConfig',
+    'user.apps.UsersConfig',
 ]
+
+
+
+LOGIN_URL = '/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,7 +94,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'user.User'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'

@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if object %}Редактирование новости{% else %}Добавление новости{% endif %}{% endblock %}
+
+{% block content %}
+<h2>{% if object %}Редактирование новости{% else %}Добавление новости{% endif %}</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% include "admin/partials/_form_controls.html" with cancel_url="admin_news_list" %}
+</form>
+{% endblock %}

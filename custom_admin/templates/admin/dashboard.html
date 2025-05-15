@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin: 0; color: #01494b;">Дашборд</h3>
+    </div>
+    <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div class="card">
+                <div class="card-body" style="background-color: #029297; color: white; border-radius: 8px;">
+                    <h4>Пользователи</h4>
+                    <h2>{{ stats.user }}</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="background-color: #28a745; color: white; border-radius: 8px;">
+                    <h4>Заказы</h4>
+                    <h2>{{ stats.order }}</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="background-color: #17a2b8; color: white; border-radius: 8px;">
+                    <h4>Сообщения</h4>
+                    <h2>{{ stats.contactmessage }}</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body" style="background-color: #ffc107; color: #212529; border-radius: 8px;">
+                    <h4>Новости</h4>
+                    <h2>{{ stats.news }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

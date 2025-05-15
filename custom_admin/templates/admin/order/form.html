@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    {% if form.instance.pk %}Редактирование заказа{% else %}Добавление заказа{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2>
+    {% if form.instance.pk %}Редактирование заказа{% else %}Добавление заказа{% endif %}
+</h2>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {# Кнопки сохранения и отмены #}
+    {% include "admin/partials/_form_controls.html" with cancel_url="admin_order_list" %}
+</form>
+{% endblock %}

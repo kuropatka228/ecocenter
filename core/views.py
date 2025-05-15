@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect
-from .models import *
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import *
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import get_object_or_404
+from .models import *
+from .forms import *
 
 def home(request):
     settings = SiteSetting.objects.first()
@@ -38,6 +37,13 @@ def contact(request):
 
     return render(request, 'core/contact.html', {'form': form})
 
+
+def staff_required(view_func):
+    return user_passes_test(lambda u: u.is_staff)(view_func)
+def news_delete(request, pk):
+    instance = get_object_or_404(News, pk=pk)
+    instance.delete()
+    return redirect('admin_news_list')
 
 def faq(request):
     if request.user.is_staff:

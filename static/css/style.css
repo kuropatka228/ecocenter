@@ -1383,6 +1383,7 @@ label {
     padding: 8px 0;
     display: flex;
     border-bottom: 1px dashed #ddd;
+    justify-content: space-between;
 }
 
 .schedule-list li:last-child {

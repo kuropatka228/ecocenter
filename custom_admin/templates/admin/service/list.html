@@ -1,0 +1,37 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin: 0; color: #01494b;">Услуги</h3>
+        <a href="{% url 'admin_service_create' %}" class="btn btn-primary">➕ Добавить</a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Цена</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for item in services %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{% if item.is_active %}<span class="badge bg-success">Активна</span>{% else %}<span class="badge bg-secondary">Скрыта</span>{% endif %}</td>
+                    <td>
+                        <a href="{% url 'admin_service_edit' item.id %}" class="btn btn-sm btn-primary">✏️</a>
+                        <a href="{% url 'admin_service_delete' item.id %}" class="btn btn-sm bg-danger" onclick="return confirm('Удалить услугу?')">🗑️</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Нет услуг.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

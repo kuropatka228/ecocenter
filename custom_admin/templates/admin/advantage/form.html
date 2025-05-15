@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if object %}Редактирование преимущества{% else %}Добавление преимущества{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin: 0; color: #01494b;">{% if object %}Редактировать преимущество{% else %}Новое преимущество{% endif %}</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label" style="color:#01494b;">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+            <a href="{% url 'admin_advantage_list' %}" class="btn btn-secondary">↩️ Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

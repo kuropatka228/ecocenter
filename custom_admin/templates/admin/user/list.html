@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin: 0; color: #01494b;">Пользователи</h3>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Нет пользователей.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Ответ на сообщение</h1>
+
+<form method="post" class="space-y-4">
+    {% csrf_token %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label for="id_name">Имя</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="id_email">Email</label>
+            {{ form.email }}
+        </div>
+        <div>
+            <label for="id_phone">Телефон</label>
+            {{ form.phone }}
+        </div>
+    </div>
+
+    <div>
+        <label for="id_message">Сообщение</label>
+        {{ form.message }}
+    </div>
+
+    <div>
+        <label for="id_answer">Ответ</label>
+        {{ form.answer }}
+    </div>
+
+    <div>
+        <label for="id_status">Статус</label>
+        {{ form.status }}
+    </div>
+
+    <button type="submit" class="px-4 py-2 bg-[#029297] text-white rounded">Сохранить</button>
+</form>
+
+<a href="{% url 'admin_contactmessage_list' %}" class="text-[#01494b] mt-4 inline-block">← Назад к списку</a>
+{% endblock %}

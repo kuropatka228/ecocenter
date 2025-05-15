@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 style="margin: 0;">Сообщения</h3>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in contactmessage %}
+                <tr>
+                    <td>{{ message.name }}</td>
+                    <td>{{ message.email }}</td>
+                    <td>{{ message.get_status_display }}</td>
+                    <td>{{ message.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <a href="{% url 'admin_contactmessage_edit' message.pk %}" class="btn btn-sm btn-primary">✏️</a>
+                        <a href="{% url 'admin_contactmessage_delete' message.pk %}" class="btn btn-sm bg-danger" onclick="return confirm('Удалить сообщение?')">🗑️</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Нет сообщений.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% include "admin/partials/_pagination.html" %}
+    </div>
+</div>
+{% endblock %}

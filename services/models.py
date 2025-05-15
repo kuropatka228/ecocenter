@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from users.models import User
+from user.models import User
 
 
 class Service(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='services/')
+    image = models.ImageField(upload_to='service/')
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 

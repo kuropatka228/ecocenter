@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Настройки сайта{% endblock %}
+
+{% block content %}
+<h2>Настройки сайта</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% include "admin/partials/_form_controls.html" with cancel_url="admin_sitesetting_list" %}
+</form>
+{% endblock %}
