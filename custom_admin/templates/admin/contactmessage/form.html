@@ -35,8 +35,9 @@
         {{ form.status }}
     </div>
 
-    <button type="submit" class="px-4 py-2 bg-[#029297] text-white rounded">Сохранить</button>
+    <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+    <a href="/myadmin/" class="btn btn-secondary">↩️ Отмена</a>
 </form>
 
-<a href="{% url 'admin_contactmessage_list' %}" class="text-[#01494b] mt-4 inline-block">← Назад к списку</a>
+
 {% endblock %}

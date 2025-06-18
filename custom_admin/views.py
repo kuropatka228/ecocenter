@@ -112,11 +112,11 @@ def contact_message_edit(request, pk):
     if request.method == 'POST':
         if 'delete' in request.POST:
             instance.delete()
-            return redirect('admin_contactmessage_list')  # Или куда тебе нужно
+            return redirect('admin_contactmessage_list')
         form = ContactMessageForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('admin_contactmessage_list')  # Или обратно к списку
+            return redirect('admin_contactmessage_list')
     else:
         form = ContactMessageForm(instance=instance)
     return render(request, 'admin/contactmessage/form.html', {'form': form})
